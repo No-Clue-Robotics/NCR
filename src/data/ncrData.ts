@@ -96,6 +96,14 @@ export interface PartnershipTier {
   benefits: LocalizedText[];
 }
 
+export interface SocialMediaLink {
+  id: 'tiktok' | 'instagram' | 'youtube' | 'github' | 'website';
+  platform: string;
+  handle: string;
+  url: string;
+  label: LocalizedText;
+}
+
 export const TEAM_INFO = {
   name: 'No Clue Robotics',
   shortName: 'N.C.R',
@@ -116,13 +124,74 @@ export const TEAM_INFO = {
     leadMentor: 'Muhammad Taufiq',
     teamCaptain: 'Kyara Zahra',
     secretary: 'P. Sahyayodha',
-    email: 'nocluecreation@gmail.com',
+    email: 'nocluerobotics@gmail.com',
     phone: '+62 858-9366-5329',
     whatsappUrl: 'https://wa.me/6285893665329',
+    websiteLabel: 'www.nocluerobotics.club',
+    websiteUrl: 'https://www.nocluerobotics.club',
     instagramHandle: '@nocluerobotics',
-    instagramUrl: 'https://www.instagram.com/nocluerobotics/',
+    instagramUrl: 'https://www.instagram.com/nocluerobotics',
+    tiktokHandle: '@nocluerobotics30647',
+    tiktokUrl: 'https://www.tiktok.com/@nocluerobotics30647',
+    youtubeHandle: '@nocluerobotics',
+    youtubeUrl: 'https://youtube.com/@nocluerobotics',
+    githubHandle: 'No-Clue-Robotics',
+    githubUrl: 'https://github.com/No-Clue-Robotics',
   },
 };
+
+export const SOCIAL_MEDIA_LINKS: SocialMediaLink[] = [
+  {
+    id: 'tiktok',
+    platform: 'TikTok',
+    handle: '@nocluerobotics30647',
+    url: 'https://www.tiktok.com/@nocluerobotics30647',
+    label: {
+      id: 'Konten Pendek & Behind The Pit',
+      en: 'Short-Form & Behind The Pit',
+    },
+  },
+  {
+    id: 'instagram',
+    platform: 'Instagram',
+    handle: '@nocluerobotics',
+    url: 'https://www.instagram.com/nocluerobotics',
+    label: {
+      id: 'Update Kegiatan & Dokumentasi',
+      en: 'Team Updates & Highlights',
+    },
+  },
+  {
+    id: 'youtube',
+    platform: 'YouTube',
+    handle: '@nocluerobotics',
+    url: 'https://youtube.com/@nocluerobotics',
+    label: {
+      id: 'Video Profil, Match & Edukasi',
+      en: 'Team Videos, Matches & Tutorials',
+    },
+  },
+  {
+    id: 'github',
+    platform: 'GitHub',
+    handle: 'No-Clue-Robotics',
+    url: 'https://github.com/No-Clue-Robotics',
+    label: {
+      id: 'Repositori Kode & Open Source',
+      en: 'Code Repositories & Open Source',
+    },
+  },
+  {
+    id: 'website',
+    platform: 'WebSite',
+    handle: 'www.nocluerobotics.club',
+    url: 'https://www.nocluerobotics.club',
+    label: {
+      id: 'Portal Resmi NCR #30647',
+      en: 'Official NCR #30647 Portal',
+    },
+  },
+];
 
 export const HERO_STATS: StatItem[] = [
   {

@@ -1,11 +1,17 @@
 import React from 'react';
-import { Language, PARTNERSHIP_TIERS, TEAM_INFO } from '@/data/ncrData';
+import {
+  Language,
+  PARTNERSHIP_TIERS,
+  SOCIAL_MEDIA_LINKS,
+  TEAM_INFO,
+} from '@/data/ncrData';
 import { SectionHeader } from '@/components/ui/SectionHeader';
+import { SocialPlatformIcon } from '@/components/ui/SocialIcons';
 import {
   Mail,
   Phone,
   MapPin,
-  Instagram,
+  Globe,
   ArrowUpRight,
   Handshake,
   Check,
@@ -16,6 +22,10 @@ interface ContactSectionProps {
 }
 
 export const ContactSection: React.FC<ContactSectionProps> = ({ lang }) => {
+  const socialPlatforms = SOCIAL_MEDIA_LINKS.filter(
+    (link) => link.id !== 'website'
+  );
+
   return (
     <section
       id="contact"
@@ -132,25 +142,26 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ lang }) => {
 
         {/* Direct Contact Channels & Workshop Location */}
         <div className="mt-14 grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
-          {/* Direct Contact Card */}
+          {/* Direct Contact & Social Media Card */}
           <div className="lg:col-span-7 p-6 sm:p-8 rounded-2xl glass-panel flex flex-col justify-between space-y-6">
             <div>
               <span className="font-mono text-xs uppercase tracking-wider text-[#C4FF01]">
                 {lang === 'id'
-                  ? 'Saluran Komunikasi Resmi'
-                  : 'Official Communication Channels'}
+                  ? 'Saluran Komunikasi & Media Sosial Resmi'
+                  : 'Official Contact & Social Media Channels'}
               </span>
               <h3 className="mt-1 font-display text-2xl sm:text-3xl font-bold text-white">
                 {lang === 'id'
-                  ? 'Hubungi Tim & Mentor Kami Secara Langsung'
-                  : 'Reach Out Directly to Our Team & Mentors'}
+                  ? 'Hubungi Tim & Ikuti Perjalanan NCR #30647'
+                  : 'Reach Out & Follow NCR #30647 Across Platforms'}
               </h3>
               <p className="mt-2 text-sm text-zinc-300 leading-relaxed">
                 {lang === 'id'
-                  ? 'Tertarik untuk mengundang NCR #30647 dalam program kunjungan edukasi sekolah (Outreach), berdiskusi mengenai kemitraan sponsor, atau bergabung dalam komunitas? Hubungi kami melalui kanal resmi berikut:'
-                  : 'Interested in inviting NCR #30647 for a school STEM outreach session, discussing sponsorship partnerships, or connecting with our community? Reach us via our verified channels below:'}
+                  ? 'Tertarik untuk mengundang NCR #30647 dalam program kunjungan edukasi sekolah (Outreach), berdiskusi mengenai kemitraan sponsor, atau mengikuti dokumentasi teknis kami? Terhubung langsung melalui kanal resmi berikut:'
+                  : 'Interested in inviting NCR #30647 for a school STEM outreach session, discussing sponsorship partnerships, or following our engineering updates? Connect with us through our verified channels below:'}
               </p>
 
+              {/* Direct Contact Grid: E-Mail, WhatsApp/Phone, Website, Location */}
               <div className="mt-6 grid grid-cols-1 sm:grid-cols-2 gap-4">
                 {/* Email */}
                 <a
@@ -162,7 +173,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ lang }) => {
                     <ArrowUpRight className="w-4 h-4 text-zinc-500 group-hover:text-[#C4FF01] transition-colors" />
                   </div>
                   <div className="mt-3 font-mono text-[11px] uppercase text-zinc-400">
-                    {lang === 'id' ? 'Email Resmi' : 'Official Email'}
+                    {lang === 'id' ? 'E-Mail Resmi' : 'Official E-Mail'}
                   </div>
                   <div className="mt-0.5 font-mono text-sm font-semibold text-white break-all">
                     {TEAM_INFO.contact.email}
@@ -188,22 +199,22 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ lang }) => {
                   </div>
                 </a>
 
-                {/* Instagram */}
+                {/* Official Website */}
                 <a
-                  href={TEAM_INFO.contact.instagramUrl}
+                  href={TEAM_INFO.contact.websiteUrl}
                   target="_blank"
                   rel="noreferrer"
                   className="p-4 rounded-xl bg-white/[0.03] hover:bg-white/[0.06] border border-white/[0.08] hover:border-[#C4FF01]/40 transition-colors group"
                 >
                   <div className="flex items-center justify-between">
-                    <Instagram className="w-5 h-5 text-[#C4FF01]" />
+                    <Globe className="w-5 h-5 text-[#C4FF01]" />
                     <ArrowUpRight className="w-4 h-4 text-zinc-500 group-hover:text-[#C4FF01] transition-colors" />
                   </div>
                   <div className="mt-3 font-mono text-[11px] uppercase text-zinc-400">
-                    Instagram Resmi
+                    {lang === 'id' ? 'Situs Web Resmi' : 'Official Website'}
                   </div>
-                  <div className="mt-0.5 font-mono text-sm font-semibold text-white">
-                    {TEAM_INFO.contact.instagramHandle}
+                  <div className="mt-0.5 font-mono text-sm font-semibold text-white break-all">
+                    {TEAM_INFO.contact.websiteLabel}
                   </div>
                 </a>
 
@@ -223,17 +234,70 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ lang }) => {
                   </div>
                 </div>
               </div>
+
+              {/* Official Social Media Section */}
+              <div className="mt-6 pt-6 border-t border-white/[0.07]">
+                <div className="flex items-center justify-between gap-2 mb-3.5">
+                  <span className="font-mono text-xs uppercase tracking-wider text-[#C4FF01]">
+                    {lang === 'id'
+                      ? 'Platform Media Sosial & Repositori Resmi'
+                      : 'Official Social Media & Code Repositories'}
+                  </span>
+                  <span className="font-mono text-[11px] text-zinc-500">
+                    @nocluerobotics
+                  </span>
+                </div>
+
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                  {socialPlatforms.map((social) => (
+                    <a
+                      key={social.id}
+                      href={social.url}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="flex items-center justify-between gap-3 p-3.5 rounded-xl bg-white/[0.03] hover:bg-white/[0.06] border border-white/[0.08] hover:border-[#C4FF01]/40 transition-colors group"
+                    >
+                      <div className="flex items-center gap-3 min-w-0">
+                        <div className="w-9 h-9 rounded-lg bg-[#C4FF01]/10 border border-[#C4FF01]/25 flex items-center justify-center text-[#C4FF01] shrink-0">
+                          <SocialPlatformIcon
+                            id={social.id}
+                            className="w-4 h-4"
+                          />
+                        </div>
+                        <div className="min-w-0">
+                          <div className="font-mono text-[11px] uppercase tracking-wider text-zinc-400">
+                            {social.platform}
+                          </div>
+                          <div className="font-mono text-xs sm:text-sm font-semibold text-white truncate">
+                            {social.handle}
+                          </div>
+                        </div>
+                      </div>
+                      <ArrowUpRight className="w-4 h-4 text-zinc-500 group-hover:text-[#C4FF01] transition-colors shrink-0" />
+                    </a>
+                  ))}
+                </div>
+              </div>
             </div>
 
             <div className="pt-4 border-t border-white/[0.07] flex flex-wrap items-center justify-between gap-4 text-xs font-mono text-zinc-400">
               <span>
-                Lead Mentor: <strong className="text-white">{TEAM_INFO.contact.leadMentor}</strong>
+                Lead Mentor:{' '}
+                <strong className="text-white">
+                  {TEAM_INFO.contact.leadMentor}
+                </strong>
               </span>
               <span>
-                Team Captain: <strong className="text-white">{TEAM_INFO.contact.teamCaptain}</strong>
+                Team Captain:{' '}
+                <strong className="text-white">
+                  {TEAM_INFO.contact.teamCaptain}
+                </strong>
               </span>
               <span>
-                Secretary: <strong className="text-white">{TEAM_INFO.contact.secretary}</strong>
+                Secretary:{' '}
+                <strong className="text-white">
+                  {TEAM_INFO.contact.secretary}
+                </strong>
               </span>
             </div>
           </div>

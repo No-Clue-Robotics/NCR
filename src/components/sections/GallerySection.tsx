@@ -18,11 +18,20 @@ export const GallerySection: React.FC<GallerySectionProps> = ({ lang }) => {
       ? GALLERY_ITEMS
       : GALLERY_ITEMS.filter((item) => item.category === filter);
 
-  const categories: { id: CategoryFilter; label: { id: string; en: string } }[] = [
+  const categories: {
+    id: CategoryFilter;
+    label: { id: string; en: string };
+  }[] = [
     { id: 'all', label: { id: 'Semua Dokumentasi', en: 'All Photos' } },
-    { id: 'robot', label: { id: 'Robot & Rekayasa', en: 'Robot & Engineering' } },
+    {
+      id: 'robot',
+      label: { id: 'Robot & Rekayasa', en: 'Robot & Engineering' },
+    },
     { id: 'competition', label: { id: 'Arena FTC', en: 'FTC Arena' } },
-    { id: 'awards', label: { id: 'Penghargaan & Skuad', en: 'Awards & Squad' } },
+    {
+      id: 'awards',
+      label: { id: 'Penghargaan & Skuad', en: 'Awards & Squad' },
+    },
     { id: 'community', label: { id: 'Pit & Workshop', en: 'Pit & Workshop' } },
   ];
 
@@ -101,10 +110,17 @@ export const GallerySection: React.FC<GallerySectionProps> = ({ lang }) => {
           </div>
         </div>
 
-        {/* Editorial Photography Grid */}
-        <div className="mt-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+        {/* Editorial Photography Grid — Fixed row heights on md/lg + absolute inset-0 image fill */}
+        <div className="mt-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 md:auto-rows-[280px] lg:auto-rows-[310px] gap-5">
           {filteredItems.map((item, idx) => {
             const isWide = item.aspect === 'wide' && filter === 'all';
+            const isLgWideExtra = item.id === 'gal-8' && filter === 'all';
+            const spanClass = isWide
+              ? 'md:col-span-2'
+              : isLgWideExtra
+                ? 'lg:col-span-2'
+                : '';
+
             return (
               <div
                 key={item.id}
@@ -117,43 +133,35 @@ export const GallerySection: React.FC<GallerySectionProps> = ({ lang }) => {
                     setActivePhotoIndex(idx);
                   }
                 }}
-                className={`group relative rounded-2xl overflow-hidden bg-[#111419] border border-white/[0.08] hover:border-[#C4FF01]/45 transition-all cursor-pointer flex flex-col justify-between ${
-                  isWide ? 'md:col-span-2' : ''
-                }`}
+                className={`group relative w-full aspect-[4/3] md:aspect-auto md:h-full rounded-2xl overflow-hidden bg-[#111419] border border-white/[0.08] hover:border-[#C4FF01]/45 transition-all cursor-pointer ${spanClass}`}
               >
-                <div
-                  className={`relative w-full overflow-hidden bg-black ${
-                    isWide ? 'aspect-[16/9]' : 'aspect-[4/3]'
-                  }`}
-                >
-                  <img
-                    src={item.src}
-                    alt={item.title[lang]}
-                    className="w-full h-full object-cover group-hover:scale-[1.03] transition-transform duration-500"
-                    loading="lazy"
-                  />
+                <img
+                  src={item.src}
+                  alt={item.title[lang]}
+                  className="absolute inset-0 w-full h-full object-cover object-center group-hover:scale-[1.04] transition-transform duration-500"
+                  loading="lazy"
+                />
 
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/15 to-transparent opacity-90" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/20 to-transparent opacity-90" />
 
-                  {/* Top Tag & Expand Icon */}
-                  <div className="absolute top-3 inset-x-3 flex items-center justify-between">
-                    <span className="px-2.5 py-1 rounded bg-black/75 backdrop-blur-md border border-white/15 font-mono text-[10px] tracking-wider text-[#C4FF01]">
-                      {item.tag}
-                    </span>
-                    <span className="w-7 h-7 rounded-md bg-black/70 border border-white/15 flex items-center justify-center text-zinc-300 group-hover:text-[#C4FF01] group-hover:border-[#C4FF01]/40 transition-colors">
-                      <Maximize2 className="w-3.5 h-3.5" />
-                    </span>
-                  </div>
+                {/* Top Tag & Expand Icon */}
+                <div className="absolute top-3 inset-x-3 flex items-center justify-between z-10">
+                  <span className="px-2.5 py-1 rounded bg-black/75 backdrop-blur-md border border-white/15 font-mono text-[10px] tracking-wider text-[#C4FF01]">
+                    {item.tag}
+                  </span>
+                  <span className="w-7 h-7 rounded-md bg-black/70 border border-white/15 flex items-center justify-center text-zinc-300 group-hover:text-[#C4FF01] group-hover:border-[#C4FF01]/40 transition-colors">
+                    <Maximize2 className="w-3.5 h-3.5" />
+                  </span>
+                </div>
 
-                  {/* Bottom Title & Caption */}
-                  <div className="absolute bottom-0 inset-x-0 p-4 sm:p-5">
-                    <h3 className="font-display font-bold text-sm sm:text-base text-white leading-snug">
-                      {item.title[lang]}
-                    </h3>
-                    <p className="mt-1 text-xs text-zinc-300 line-clamp-2">
-                      {item.caption[lang]}
-                    </p>
-                  </div>
+                {/* Bottom Title & Caption */}
+                <div className="absolute bottom-0 inset-x-0 p-4 sm:p-5 z-10">
+                  <h3 className="font-display font-bold text-sm sm:text-base text-white leading-snug">
+                    {item.title[lang]}
+                  </h3>
+                  <p className="mt-1 text-xs text-zinc-300 line-clamp-2">
+                    {item.caption[lang]}
+                  </p>
                 </div>
               </div>
             );
@@ -197,7 +205,7 @@ export const GallerySection: React.FC<GallerySectionProps> = ({ lang }) => {
               <img
                 src={activePhoto.src}
                 alt={activePhoto.title[lang]}
-                className="max-h-[72vh] w-auto object-contain"
+                className="max-h-[72vh] w-auto max-w-full object-contain"
               />
 
               {/* Prev / Next Controls */}

@@ -109,8 +109,12 @@ pnpm run preview
 - **Lead Mentor**: Muhammad Taufiq (`+62 858-9366-5329`)
 - **Team Captain**: Kyara Zahra
 - **Secretary & Treasurer**: P. Sahyayodha
-- **Email**: [nocluecreation@gmail.com](mailto:nocluecreation@gmail.com)
-- **Instagram**: [@nocluerobotics](https://www.instagram.com/nocluerobotics/)
+- **Email**: [nocluerobotics@gmail.com](mailto:nocluerobotics@gmail.com)
+- **Website**: [https://www.nocluerobotics.club](https://www.nocluerobotics.club)
+- **TikTok**: [@nocluerobotics30647](https://www.tiktok.com/@nocluerobotics30647)
+- **Instagram**: [@nocluerobotics](https://www.instagram.com/nocluerobotics)
+- **YouTube**: [@nocluerobotics](https://youtube.com/@nocluerobotics)
+- **GitHub**: [No-Clue-Robotics](https://github.com/No-Clue-Robotics)
 
 ---
 
