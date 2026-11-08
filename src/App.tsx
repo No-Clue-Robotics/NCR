@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Language } from '@/data/ncrData';
 import { Navbar } from '@/components/layout/Navbar';
 import { Footer } from '@/components/layout/Footer';
@@ -11,6 +11,10 @@ import { ContactSection } from '@/components/sections/ContactSection';
 
 export const App: React.FC = () => {
   const [lang, setLang] = useState<Language>('id');
+
+  useEffect(() => {
+    document.documentElement.lang = lang;
+  }, [lang]);
 
   return (
     <div className="min-h-screen bg-[#090A0B] text-[#F5F7FA] flex flex-col">

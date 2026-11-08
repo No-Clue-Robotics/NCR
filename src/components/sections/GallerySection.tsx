@@ -36,6 +36,17 @@ export const GallerySection: React.FC<GallerySectionProps> = ({ lang }) => {
   ];
 
   useEffect(() => {
+    if (activePhotoIndex !== null) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [activePhotoIndex]);
+
+  useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (activePhotoIndex === null) return;
       if (e.key === 'Escape') {
@@ -174,6 +185,9 @@ export const GallerySection: React.FC<GallerySectionProps> = ({ lang }) => {
         <div
           className="fixed inset-0 z-50 bg-black/92 backdrop-blur-md flex items-center justify-center p-4 sm:p-6"
           onClick={() => setActivePhotoIndex(null)}
+          role="dialog"
+          aria-modal="true"
+          aria-label={activePhoto.title[lang]}
         >
           <div
             className="relative max-w-5xl w-full rounded-2xl glass-panel overflow-hidden shadow-2xl"

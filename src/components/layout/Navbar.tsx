@@ -16,6 +16,7 @@ export const Navbar: React.FC<NavbarProps> = ({ lang, setLang }) => {
     const handleScroll = () => {
       setScrolled(window.scrollY > 24);
     };
+    handleScroll();
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
